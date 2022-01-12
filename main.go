@@ -102,15 +102,13 @@ func WithdrawBalance(urlBalance, urlBal string, bal *_type.Balance) (bool, error
 
 func getBalance(url string, bal *_type.Balance) (int64, error) {
 	res, err := http.Get(url)
-	fmt.Println(url)
 	if err != nil {
 		log.Fatalf("get balance from url %v failed with error: %v", url, err)
 	}
 	defer res.Body.Close()
+
 	body, _ := ioutil.ReadAll(res.Body)
 	err = json.Unmarshal(body, &bal)
-
-	log.Printf(string(body))
 
 	if err != nil {
 		return 0, err
@@ -122,16 +120,15 @@ func getBalance(url string, bal *_type.Balance) (int64, error) {
 }
 
 func withdraw(url string) error {
-	log.Printf(url)
-	//res, err := http.Post(url, "application/x-www-form-urlencoded",
-	//	strings.NewReader("name=cjb"))
-	//if err != nil {
-	//	log.Printf("failed to withdraw, an error occurred: %v", err)
-	//	return err
-	//}
-	//defer res.Body.Close()
-	//result, _ := ioutil.ReadAll(res.Body)
-	//fmt.Printf("withdraw trans: %v", string(result))
+	res, err := http.Post(url, "application/x-www-form-urlencoded",
+		strings.NewReader("name=cjb"))
+	if err != nil {
+		log.Printf("failed to withdraw, an error occurred: %v", err)
+		return err
+	}
+	defer res.Body.Close()
+	result, _ := ioutil.ReadAll(res.Body)
+	fmt.Printf("withdraw trans: %v", string(result))
 
 	return nil
 }
