@@ -116,15 +116,16 @@ func getBalance(url string, bal *_type.Balance) (int64, error) {
 }
 
 func withdraw(url string) error {
-	res, err := http.Post(url, "application/x-www-form-urlencoded",
-		strings.NewReader("name=cjb"))
-	if err != nil {
-		log.Printf("failed to withdraw, an error occurred: %v", err)
-		return err
-	}
-	defer res.Body.Close()
-	result, _ := ioutil.ReadAll(res.Body)
-	fmt.Printf("withdraw trans: %v", string(result))
+	log.Printf(url)
+	//res, err := http.Post(url, "application/x-www-form-urlencoded",
+	//	strings.NewReader("name=cjb"))
+	//if err != nil {
+	//	log.Printf("failed to withdraw, an error occurred: %v", err)
+	//	return err
+	//}
+	//defer res.Body.Close()
+	//result, _ := ioutil.ReadAll(res.Body)
+	//fmt.Printf("withdraw trans: %v", string(result))
 
 	return nil
 }
