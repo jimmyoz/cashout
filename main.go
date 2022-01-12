@@ -101,6 +101,7 @@ func WithdrawBalance(urlBalance string, bal *_type.Balance) (bool, error) {
 
 func getBalance(url string, bal *_type.Balance) (int64, error) {
 	res, err := http.Get(url)
+	fmt.Println(url)
 	if err != nil {
 		log.Fatalf("get balance from url %v failed with error: %v", url, err)
 	}
