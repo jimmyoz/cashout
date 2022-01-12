@@ -108,6 +108,8 @@ func getBalance(url string, bal *_type.Balance) (int64, error) {
 	body, _ := ioutil.ReadAll(res.Body)
 	err = json.Unmarshal(body, &bal)
 
+	log.Printf(string(body))
+
 	if err != nil {
 		return 0, err
 	}
