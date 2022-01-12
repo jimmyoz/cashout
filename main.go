@@ -21,6 +21,7 @@ func main() {
 
 	urlCashout := config.Url + config.Cashout
 	urlWithDraw := config.Url + config.Withdraw
+	urlBal := config.Url + config.Balance
 	for {
 		checkUrl := config.Url + config.Checkbook
 		err := GetCheckbook(checkUrl, &c)
@@ -36,7 +37,7 @@ func main() {
 		} else {
 			CashoutAllToBalance(urlCashout, &c)
 			time.Sleep(time.Second * 60)
-			suc, err := WithdrawBalance(urlWithDraw, &b)
+			suc, err := WithdrawBalance(urlWithDraw, urlBal, &b)
 			if err != nil || !suc {
 				log.Printf("withdraw failed with error: %v", err)
 				time.Sleep(time.Second * 60)
@@ -80,8 +81,8 @@ func CashoutAllToBalance(url string, checkbook *_type.Checkbook) {
 	}
 }
 
-func WithdrawBalance(urlBalance string, bal *_type.Balance) (bool, error) {
-	amt, err := getBalance(urlBalance, bal)
+func WithdrawBalance(urlBalance, urlBal string, bal *_type.Balance) (bool, error) {
+	amt, err := getBalance(urlBal, bal)
 	//amt, err := testGetBalance(bal)
 	if err != nil {
 		return false, err
