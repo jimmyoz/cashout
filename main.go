@@ -129,7 +129,7 @@ func withdraw(url string) error {
 	}
 	defer res.Body.Close()
 	result, _ := ioutil.ReadAll(res.Body)
-	fmt.Printf("withdraw trans: %v", string(result))
+	log.Printf("withdraw trans: %v", string(result))
 
 	return nil
 }
@@ -143,7 +143,7 @@ func postCashout(url string) error {
 	}
 	defer res.Body.Close()
 	result, _ := ioutil.ReadAll(res.Body)
-	fmt.Printf("cashout trans: %v", string(result))
+	log.Printf("cashout trans: %v", string(result))
 	return nil
 }
 
