@@ -33,6 +33,7 @@ func main() {
 			continue
 		}
 		if has := hasCheckToCashout(&c); !has {
+			log.Printf("we don't have any cheque to cash out")
 			time.Sleep(time.Hour * 6)
 			continue
 		} else {
