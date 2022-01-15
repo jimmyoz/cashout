@@ -32,7 +32,7 @@ func main() {
 			time.Sleep(time.Hour * 6)
 			continue
 		}
-		if has, err := hasCheckToCashout(&c); err != nil || !has {
+		if has := hasCheckToCashout(&c); !has {
 			time.Sleep(time.Hour * 6)
 			continue
 		} else {
@@ -148,18 +148,18 @@ func postCashout(url string) error {
 	return nil
 }
 
-func hasCheckToCashout(checkbook *_type.Checkbook) (bool, error) {
+func hasCheckToCashout(checkbook *_type.Checkbook) bool {
 	if len(checkbook.Lastcheques) == 0 {
-		return false, nil
+		return false
 	}
 
 	for _, lastCheck := range checkbook.Lastcheques {
 		if lastCheck.Lastreceived.Payout != 0 {
-			return true, nil
+			return true
 		}
 	}
 
-	return false, nil
+	return false
 }
 
 func testGetCheckBook(checkbook *_type.Checkbook) error {
