@@ -22,8 +22,9 @@ func main() {
 	urlCashout := config.Url + config.Cashout
 	urlWithDraw := config.Url + config.Withdraw
 	urlBal := config.Url + config.Balance
+	checkUrl := config.Url + config.Checkbook
+
 	for {
-		checkUrl := config.Url + config.Checkbook
 		err := GetCheckbook(checkUrl, &c)
 		//err := testGetCheckBook(&c)
 		if err != nil {
