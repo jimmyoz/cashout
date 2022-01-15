@@ -23,7 +23,7 @@ func main() {
 	urlWithDraw := config.Url + config.Withdraw
 	urlBal := config.Url + config.Balance
 	checkUrl := config.Url + config.Checkbook
-
+	log.Printf("Starting Cashout and withdraw....")
 	for {
 		err := GetCheckbook(checkUrl, &c)
 		//err := testGetCheckBook(&c)
