@@ -28,23 +28,24 @@ func main() {
 		//err := testGetCheckBook(&c)
 		if err != nil {
 			log.Printf("get checkbook failed with err: %v", err)
-			time.Sleep(time.Second * 60)
-			return
+			time.Sleep(time.Hour * 6)
+			continue
 		}
 		if has, err := hasCheckToCashout(&c); err != nil || !has {
-			time.Sleep(time.Second * 60)
+			time.Sleep(time.Hour * 6)
 			continue
 		} else {
 			CashoutAllToBalance(urlCashout, &c)
-			time.Sleep(time.Second * 60)
+			time.Sleep(time.Second * 120)
 			suc, err := WithdrawBalance(urlWithDraw, urlBal, &b)
 			if err != nil || !suc {
 				log.Printf("withdraw failed with error: %v", err)
-				time.Sleep(time.Second * 60)
+				time.Sleep(time.Hour * 6)
 				continue
 			} else {
 				log.Printf("withdraw successfully")
-				time.Sleep(time.Second * 60)
+				time.Sleep(time.Hour * 6)
+				continue
 			}
 		}
 	}
